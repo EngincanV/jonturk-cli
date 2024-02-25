@@ -18,7 +18,7 @@ public class RemoveCommand : ICommand
         var saveFilePath = CliConsts.JonTurkSaveFilePath;
         if (!File.Exists(saveFilePath))
         {
-            AnsiConsole.MarkupLine("[red]There is not any saved command![/]");
+            AnsiConsole.MarkupLine($"[red]Could not find the specified command with the name '{Name}' in the saved commands list.[/]");
             return;
         }
         
