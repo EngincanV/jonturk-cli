@@ -12,10 +12,10 @@ namespace JonTurkCli.Commands;
 public class SaveCommand : ICommand
 {
     [CommandOption("name", 'n', IsRequired = true)]
-    public required string Name { get; init; }
+    public required string Name { get; set; }
 
     [CommandOption("command", 'c', IsRequired = true)]
-    public required string Command { get; init; }
+    public required string Command { get; set; }
 
     public async ValueTask ExecuteAsync(IConsole console)
     {
@@ -30,6 +30,8 @@ public class SaveCommand : ICommand
             var commandSaveLines = JsonSerializer.Deserialize<CommandSaveLinesModel>(fileContent) 
                                    ?? new CommandSaveLinesModel();
 
+            NormalizeCommandOptions();
+            
             if (commandSaveLines.Commands.Any(command => command.Name.Equals(Name, StringComparison.OrdinalIgnoreCase)))
             {
                 throw new DuplicateCommandException($"There is already a saved command with the '{Name}' keyword, " +
@@ -69,5 +71,11 @@ public class SaveCommand : ICommand
         {
             writer.Write("{}");
         }
+    }
+
+    private void NormalizeCommandOptions()
+    {
+        Name = Name.Trim('"');
+        Command = Command.Trim('"');
     }
 }
