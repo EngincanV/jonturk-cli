@@ -14,7 +14,7 @@ public class RunCommand : ICommand
     public required string Name { get; set; }
     
     [CommandOption("path", 'p', Description = "Working directory were the command will be run.")]
-    public string? WorkingDirectory { get; set; }
+    public string? WorkingDirectory { get; init; }
     
     public async ValueTask ExecuteAsync(IConsole console)
     {
@@ -40,11 +40,13 @@ public class RunCommand : ICommand
             
             var command = commandSaveLines.Commands.First(command => command.Name.Equals(Name, StringComparison.OrdinalIgnoreCase)).Command;
 
+            AnsiConsole.MarkupLine($"Running the command: [green]'{command}'[/]");
+            AnsiConsole.WriteLine();
+            
             await AnsiConsole.Status()
-                .StartAsync($"Running the command: [green]'{command}'[/]", context =>
+                .StartAsync("The command is being processed...", context =>
                 {
                     CommandRunner.Run(command, out var output, WorkingDirectory);
-            
                     AnsiConsole.WriteLine(output);
                     
                     return Task.CompletedTask;
