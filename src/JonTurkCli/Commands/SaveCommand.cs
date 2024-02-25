@@ -4,6 +4,7 @@ using CliFx.Attributes;
 using CliFx.Infrastructure;
 using JonTurkCli.Exceptions;
 using JonTurkCli.Models;
+using Spectre.Console;
 
 namespace JonTurkCli.Commands;
 
@@ -44,12 +45,12 @@ public class SaveCommand : ICommand
         {
             File.Delete(saveFilePath);
 
-            await console.Error.WriteLineAsync($"{saveFilePath} file was in a invalid state and therefore it has been deleted. " +
-                                               $"You can run the command again, if you want to save the command.");
+            AnsiConsole.Console.WriteLine($"{saveFilePath} file was in a invalid state and therefore it has been deleted. " +
+                                          $"You can run the command again, if you want to save the command.");
         }
         catch (DuplicateCommandException ex)
         {
-            await console.Error.WriteLineAsync(ex.Message);
+            AnsiConsole.Console.WriteLine(ex.Message);
         }
         catch (Exception ex) when (ex is not DuplicateCommandException)
         {

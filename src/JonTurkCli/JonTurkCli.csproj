@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="CliFx" Version="2.3.5" />
+    <PackageReference Include="Spectre.Console" Version="0.48.1-preview.0.31" />
   </ItemGroup>
 
 </Project>
