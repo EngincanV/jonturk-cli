@@ -2,9 +2,9 @@
 
 <a href="https://www.nuget.org/packages/JonTurkCli"><img src="https://img.shields.io/nuget/v/JonTurkCli?logo=nuget" alt="JonTurk CLI on Nuget" /></a>
 
-A command line tool that allows you to save, list and run the frequently used CLI commands. It's a dotnet tool and can be accessed via `jonturk` **CLI** command, after you followed the installation instructions below.
+A command line tool that allows you to save, list, and run the frequently used CLI commands. It's a dotnet tool and can be accessed via `jonturk` **CLI** command after you follow the installation instructions below.
 
-> Love the JonTurk CLI? Then, please **give a star**(⭐)! If you find any bug, or want to have additional features, don't hesitate to create an issue. Thanks in advance!
+> Love the JonTurk CLI? Then, please **give a star**(⭐)! If you find any bug or want to have additional features, don't hesitate to create an issue. Thanks in advance!
 
 ## Installation
 
@@ -22,9 +22,45 @@ You can execute the `jonturk --help` command in the terminal to list all command
 jonturk --help
 ```
 
-Here are list of options those currently supported:
+## Commands
 
-* `ListCommand` (Lists the saved commands)
-* `RemoveCommand` (Removes the specified command from the saved commands)
-* `RunCommand` (Runs the specified command)
-* `SaveCommand` (Saves the related command with the name)
+The following commands are currently available:
+
+### Save Command
+
+Saves the related command with the name:
+
+```bash
+jonturk save -n "cache-clear" -c "dotnet nuget locals all --clear" 
+```
+
+* **-n | --name** (Name of the command)
+* **-c | --command** (Command (with arguments))
+
+### List Command
+
+Lists the saved commands in a table view:
+
+```bash
+jonturk list
+```
+
+### Run Command
+
+Runs the specified command:
+
+```bash
+jonturk run -n "cache-clear"
+```
+
+* **-n | --name** (Name of the command)
+
+### Remove Command
+
+Removes the specified command from the saved commands:
+
+```bash
+jonturk remove -n "cache-clear"
+```
+
+* **-n | --name** (Name of the command)
