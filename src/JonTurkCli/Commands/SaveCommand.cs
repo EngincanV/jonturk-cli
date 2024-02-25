@@ -47,12 +47,12 @@ public class SaveCommand : ICommand
         {
             File.Delete(saveFilePath);
 
-            AnsiConsole.Console.WriteLine($"{saveFilePath} file was in a invalid state and therefore it has been deleted. " +
-                                          $"You can run the command again, if you want to save the command.");
+            AnsiConsole.MarkupLine($"[red]'{saveFilePath}' file was in a invalid state and therefore it has been deleted. " +
+                                           $"You can run the command again, if you want to save the command.[/]");
         }
         catch (DuplicateCommandException ex)
         {
-            AnsiConsole.Console.WriteLine(ex.Message);
+            AnsiConsole.MarkupLine($"[red]{ex.Message}[/]");
         }
         catch (Exception ex) when (ex is not DuplicateCommandException)
         {
