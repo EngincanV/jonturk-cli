@@ -10,7 +10,7 @@ namespace JonTurkCli.Commands;
 [Command(Description = "Removes the specified command from the saved commands.")]
 public class RemoveCommand : ICommand
 {
-    [CommandOption("name", 'n', IsRequired = true)]
+    [CommandOption("name", 'n', IsRequired = true, Description = "Name of the command")]
     public required string Name { get; set; }
     
     public async ValueTask ExecuteAsync(IConsole console)

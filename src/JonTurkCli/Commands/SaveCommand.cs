@@ -8,13 +8,13 @@ using Spectre.Console;
 
 namespace JonTurkCli.Commands;
 
-[Command(Description = "Saves the related command with the name, so all of the commands can be listed and run later on.")]
+[Command(Description = "Saves the related command with the name.")]
 public class SaveCommand : ICommand
 {
-    [CommandOption("name", 'n', IsRequired = true)]
+    [CommandOption("name", 'n', IsRequired = true, Description = "Name of the command")]
     public required string Name { get; set; }
 
-    [CommandOption("command", 'c', IsRequired = true)]
+    [CommandOption("command", 'c', IsRequired = true, Description = "Command (with arguments)")]
     public required string Command { get; set; }
 
     public async ValueTask ExecuteAsync(IConsole console)
@@ -36,7 +36,7 @@ public class SaveCommand : ICommand
             {
                 throw new DuplicateCommandException($"There is already a saved command with the '{Name}' keyword, " +
                                                     "please change the command name and then retry to save the command." +
-                                                    "You can list all saved commands with the 'jonturk-cli list' command!");
+                                                    "You can list all saved commands with the 'jonturk list' command!");
             }
 
             commandSaveLines.Commands.Add(new CommandSaveLineModel(Name, Command));
@@ -49,8 +49,8 @@ public class SaveCommand : ICommand
         {
             File.Delete(saveFilePath);
 
-            AnsiConsole.MarkupLine($"[red]'{saveFilePath}' file was in a invalid state and therefore it has been deleted. " +
-                                           $"You can run the command again, if you want to save the command.[/]");
+            AnsiConsole.MarkupLine($"[red]'{saveFilePath}' file was in an invalid state and therefore it has been deleted. " +
+                                           $"You can run the command again if you want to save the command.[/]");
         }
         catch (DuplicateCommandException ex)
         {

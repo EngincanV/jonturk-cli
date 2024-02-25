@@ -7,13 +7,13 @@ using Spectre.Console;
 
 namespace JonTurkCli.Commands;
 
-[Command(Description = "Run the specified command.")]
+[Command(Description = "Runs the specified command.")]
 public class RunCommand : ICommand
 {
-    [CommandOption("name", 'n', IsRequired = true)]
+    [CommandOption("name", 'n', IsRequired = true, Description = "Name of the command")]
     public required string Name { get; set; }
     
-    [CommandOption("path", 'p', Description = "Working directory were the command will be run.")]
+    [CommandOption("path", 'p', Description = "Working directory where the command will be run.")]
     public string? WorkingDirectory { get; init; }
     
     public async ValueTask ExecuteAsync(IConsole console)
@@ -27,7 +27,7 @@ public class RunCommand : ICommand
 
         try
         {
-            Name = Name.Trim('"');
+            NormalizeCommandOptions();
 
             var fileContent = await File.ReadAllTextAsync(saveFilePath);
 
@@ -44,7 +44,7 @@ public class RunCommand : ICommand
             AnsiConsole.WriteLine();
             
             await AnsiConsole.Status()
-                .StartAsync("The command is being processed...", context =>
+                .StartAsync("The command is being processed...", _ =>
                 {
                     CommandRunner.Run(command, out var output, WorkingDirectory);
                     AnsiConsole.WriteLine(output);
@@ -54,7 +54,12 @@ public class RunCommand : ICommand
         }
         catch
         {
-            AnsiConsole.MarkupLine("Could not run the command!");
+            AnsiConsole.MarkupLine("[red]Could not run the command![/]");
         }
+    }
+
+    private void NormalizeCommandOptions()
+    {
+        Name = Name.Trim('"');
     }
 }

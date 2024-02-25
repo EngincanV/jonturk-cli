@@ -15,7 +15,7 @@ public class ListCommand : ICommand
         var saveFilePath = CliConsts.JonTurkSaveFilePath;
         if (!File.Exists(saveFilePath))
         {
-            AnsiConsole.MarkupLine("[red]There is not any saved command![/]");
+            AnsiConsole.MarkupLine("[red]There is no saved command![/]");
             return;
         }
 
@@ -26,7 +26,7 @@ public class ListCommand : ICommand
             var commandSaveLines = JsonSerializer.Deserialize<CommandSaveLinesModel>(fileContent);
             if (commandSaveLines == null || !commandSaveLines.Commands.Any())
             {
-                AnsiConsole.MarkupLine("[red]There is not any saved command![/]");
+                AnsiConsole.MarkupLine("[red]There is no saved command![/]");
                 return;
             }
 
@@ -42,7 +42,7 @@ public class ListCommand : ICommand
     {
         var table = new Table();
 
-        table.AddColumn("Command name");
+        table.AddColumn("Name");
         table.AddColumn("Command");
 
         foreach (var (name, command) in commands)
