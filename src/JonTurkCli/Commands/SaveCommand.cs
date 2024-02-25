@@ -42,6 +42,8 @@ public class SaveCommand : ICommand
             commandSaveLines.Commands.Add(new CommandSaveLineModel(Name, Command));
 
             await File.WriteAllTextAsync(saveFilePath, JsonSerializer.Serialize(commandSaveLines));
+            
+            AnsiConsole.MarkupLine($"[green]The command with the name '{Name}' is successfully saved![/]");
         }
         catch (JsonException ex)
         {
