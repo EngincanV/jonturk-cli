@@ -11,7 +11,7 @@ public class Program
         return await new CliApplicationBuilder()
             .SetExecutableName("jonturk")
             .SetTitle("JonTurk CLI")
-            .SetDescription("A command line tool that allows you to save, list and run the frequently used CLI commands by you.")
+            .SetDescription("A command line tool that allows you to save, list and run the frequently used CLI commands.")
             .AddCommandsFromThisAssembly()
             .Build()
             .RunAsync();
