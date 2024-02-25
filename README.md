@@ -8,10 +8,10 @@ A command line tool that allows you to save, list and run the frequently used CL
 
 ## Installation
 
-You can install the CLI tool with by running the following command:
+You can install the CLI tool by running the following command:
 
 ```bash
-dotnet tool install -g JonTurk
+dotnet tool install --global JonTurkCli
 ```
 
 ## Usage
