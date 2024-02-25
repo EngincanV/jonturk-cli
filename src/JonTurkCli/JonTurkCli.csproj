@@ -2,14 +2,26 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <Version>1.0.0</Version>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <IsPackable>true</IsPackable>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/EngincanV/jonturk-cli</RepositoryUrl>
+    
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>jonturk</ToolCommandName>
+    <PackageOutputPath>../../nupkg</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CliFx" Version="2.3.5" />
     <PackageReference Include="Spectre.Console" Version="0.48.1-preview.0.31" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
