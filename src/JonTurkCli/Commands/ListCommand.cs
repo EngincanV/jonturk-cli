@@ -7,7 +7,7 @@ using Spectre.Console;
 
 namespace JonTurkCli.Commands;
 
-[Command(Description = "Lists the saved commands.")]
+[Command("list", Description = "Lists the saved commands.")]
 public class ListCommand : ICommand
 {
     public async ValueTask ExecuteAsync(IConsole console)

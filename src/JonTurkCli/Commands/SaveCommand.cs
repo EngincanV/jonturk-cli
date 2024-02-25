@@ -8,7 +8,7 @@ using Spectre.Console;
 
 namespace JonTurkCli.Commands;
 
-[Command(Description = "Saves the related command with the name.")]
+[Command("save", Description = "Saves the related command with the name.")]
 public class SaveCommand : ICommand
 {
     [CommandOption("name", 'n', IsRequired = true, Description = "Name of the command")]

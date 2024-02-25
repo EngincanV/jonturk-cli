@@ -7,7 +7,7 @@ using Spectre.Console;
 
 namespace JonTurkCli.Commands;
 
-[Command(Description = "Runs the specified command.")]
+[Command("run", Description = "Runs the specified command.")]
 public class RunCommand : ICommand
 {
     [CommandOption("name", 'n', IsRequired = true, Description = "Name of the command")]
