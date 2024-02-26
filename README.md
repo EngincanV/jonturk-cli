@@ -54,6 +54,7 @@ jonturk run -n "cache-clear"
 ```
 
 * **-n | --name** (Name of the command)
+* **-p | --path** (The working directory where the command will be run.)
 
 ### Remove Command
 
