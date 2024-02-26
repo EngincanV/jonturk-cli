@@ -22,6 +22,10 @@ You can execute the `jonturk --help` command in the terminal to list all command
 jonturk --help
 ```
 
+Here is an example usage of `list` and `run` commands:
+
+![](/assets/jonturk-cli.gif)
+
 ## Commands
 
 The following commands are currently available:
