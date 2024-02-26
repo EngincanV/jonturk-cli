@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.png" height="256" />
+</p>
+
 # JonTurk CLI
 
 <a href="https://www.nuget.org/packages/JonTurkCli"><img src="https://img.shields.io/nuget/v/JonTurkCli?logo=nuget" alt="JonTurk CLI on Nuget" /></a>
