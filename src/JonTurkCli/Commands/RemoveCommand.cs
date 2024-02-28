@@ -39,6 +39,8 @@ public class RemoveCommand : ICommand
 
             await File.WriteAllTextAsync(saveFilePath, JsonSerializer.Serialize(commandSaveLines));
             
+            DeletePs1FileIfExists();
+            
             AnsiConsole.MarkupLine($"[green]The command with the name '{Name}' is successfully deleted![/]");
         }
         catch
@@ -47,6 +49,15 @@ public class RemoveCommand : ICommand
         }
     }
 
+    private void DeletePs1FileIfExists()
+    {
+        var path = Path.Combine(CliConsts.JonTurkScriptsFolderPath, $"{Name}.ps1");
+        if(File.Exists(path))
+        {
+            File.Delete(path);
+        }
+    }
+    
     private void NormalizeCommandOptions()
     {
         Name = Name.Trim('"');

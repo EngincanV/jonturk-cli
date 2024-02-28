@@ -43,6 +43,8 @@ public class SaveCommand : ICommand
 
             await File.WriteAllTextAsync(saveFilePath, JsonSerializer.Serialize(commandSaveLines));
             
+            await CreatePs1FileIfNotExistsAsync(Command);
+            
             AnsiConsole.MarkupLine($"[green]The command with the name '{Name}' is successfully saved![/]");
         }
         catch (JsonException ex)
@@ -62,7 +64,7 @@ public class SaveCommand : ICommand
         }
     }
 
-    private static void CreateFileIfNotExists(string filePath)
+    private static void CreateFileIfNotExists(string filePath, bool isBlank = false)
     {
         if (File.Exists(filePath))
         {
@@ -74,7 +76,46 @@ public class SaveCommand : ICommand
             writer.Write("{}");
         }
     }
+    
+    private static void AddEnvironmentPathIfNotExists(string directoryPath)
+    {
+        if(!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
+        
+        var environmentPath = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.User) ?? string.Empty;
+        var paths = environmentPath.Split(";");
+        
+        if (paths.Contains(directoryPath))
+        {
+            return;
+        }
 
+        if (!environmentPath.EndsWith(';'))
+        {
+            environmentPath += ";";
+        }
+        
+        environmentPath += $"{directoryPath}";
+        
+        Environment.SetEnvironmentVariable("PATH", environmentPath, EnvironmentVariableTarget.User);
+    }
+    
+    private async Task CreatePs1FileIfNotExistsAsync(string content)
+    {
+        try
+        {
+            AddEnvironmentPathIfNotExists(CliConsts.JonTurkScriptsFolderPath);
+            await using var writer = new StreamWriter(Path.Combine(CliConsts.JonTurkScriptsFolderPath, $"{Name}.ps1"));
+            await writer.WriteAsync(content);
+        }
+        catch (Exception ex)
+        {
+            AnsiConsole.MarkupLine("[red]Could not create the ps1 file[/]");
+        }
+    }
+    
     private void NormalizeCommandOptions()
     {
         Name = Name.Trim('"');
