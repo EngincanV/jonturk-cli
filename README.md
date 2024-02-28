@@ -32,7 +32,7 @@ The following commands are currently available:
 
 ### Save Command
 
-Saves the related command with the name:
+Saves the related command with the name and creates a PowerShell script for the command (under the **%USERPROFILE%/.jonturk/script** path):
 
 ```bash
 jonturk save -n "cache-clear" -c "dotnet nuget locals all --clear" 
@@ -69,3 +69,7 @@ jonturk remove -n "cache-clear"
 ```
 
 * **-n | --name** (Name of the command)
+
+## Want to Contribute?
+
+See [the contribution guide](CONTRIBUTING.md) if you want to contribute to this project.
